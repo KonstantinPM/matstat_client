@@ -1,0 +1,25 @@
+<mat-card class="config-card">
+  <mat-card-title>Dataset configuration</mat-card-title>
+  <mat-form-field>
+    <mat-label>Distribution type</mat-label>
+    <mat-select [(value)]="distributionType">
+      <mat-option *ngFor="let type of distributionTypes" [value]="type">
+        {{type}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br/>
+  <mat-form-field class="config-field">
+    <input [(ngModel)]="firstParam" matInput type="number" placeholder="Param 1">
+  </mat-form-field>
+  <br/>
+  <mat-form-field class="config-field">
+    <input [(ngModel)]="secondParam" matInput type="number" placeholder="Param 2">
+  </mat-form-field>
+  <br/>
+  <mat-form-field class="config-field">
+    <input [(ngModel)]="size" matInput type="number" placeholder="Size">
+  </mat-form-field>
+  <br/>
+  <button mat-raised-button color="primary" (click)="click()">Generate</button>
+</mat-card>

@@ -1,0 +1,27 @@
+.header-text {
+  padding: 5px 15px 5px 15px;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.header-icon {
+  padding: 5px 15px 5px 15px;
+}
+
+.middle-icon {
+  line-height: 1.45;
+}
+
+.header {
+  border-radius: 5px;
+  cursor: pointer;
+}
+.header:hover {
+  background-color: #2d41c3;
+}
+
+.header-link {
+  text-decoration: none;
+  color: white;
+}
