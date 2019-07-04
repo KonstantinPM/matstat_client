@@ -1,25 +1,57 @@
-<mat-card class="config-card">
-  <mat-card-title>Dataset configuration</mat-card-title>
-  <mat-form-field>
-    <mat-label>Distribution type</mat-label>
-    <mat-select [(value)]="distributionType">
-      <mat-option *ngFor="let type of distributionTypes" [value]="type">
-        {{type}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br/>
-  <mat-form-field class="config-field">
-    <input [(ngModel)]="firstParam" matInput type="number" placeholder="Param 1">
-  </mat-form-field>
-  <br/>
-  <mat-form-field class="config-field">
-    <input [(ngModel)]="secondParam" matInput type="number" placeholder="Param 2">
-  </mat-form-field>
-  <br/>
-  <mat-form-field class="config-field">
-    <input [(ngModel)]="size" matInput type="number" placeholder="Size">
-  </mat-form-field>
-  <br/>
-  <button mat-raised-button color="primary" (click)="click()">Generate</button>
-</mat-card>
+<div class="container"
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="start"
+      fxLayoutGap="5px"
+      fxFlexFill>
+  <mat-card class="item item-1" fxFlex="25%" style="text-align: center">
+    <mat-card-title>Dataset configuration</mat-card-title>
+    <mat-form-field>
+      <mat-label>Distribution type</mat-label>
+      <mat-select [(value)]="distributionType" (selectionChange)="onChangeDistType()">
+        <mat-option *ngFor="let type of distributionTypes" [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br/>
+    <mat-form-field>
+      <input [(ngModel)]="firstParam" matInput type="number" [placeholder]="firstParamPH"
+             [formControl]="firstParamFormControl">
+      <mat-error *ngIf="firstParamFormControl.hasError('min') ||
+                      firstParamFormControl.hasError('max') ||
+                      firstParamFormControl.hasError('required')">
+        Please enter first parameter of distribution
+      </mat-error>
+    </mat-form-field>
+    <br/>
+    <mat-form-field *ngIf="!haveOnlyOneParameter">
+      <input [(ngModel)]="secondParam" matInput type="number" [placeholder]="secondParamPH"
+             [formControl]="secondParamFormControl">
+      <mat-error *ngIf="secondParamFormControl.hasError('min') ||
+                      secondParamFormControl.hasError('max') ||
+                      secondParamFormControl.hasError('required')">
+        Please enter second parameter of distribution
+      </mat-error>
+    </mat-form-field>
+    <br/>
+    <mat-form-field>
+      <input [(ngModel)]="size" matInput type="number" placeholder="Size" [formControl]="sizeFormControl" step="100">
+      <mat-error *ngIf="sizeFormControl.hasError('min') ||
+                      sizeFormControl.hasError('max') ||
+                      sizeFormControl.hasError('required')">
+        Please enter size of distribution
+      </mat-error>
+    </mat-form-field>
+    <br/>
+    <button [disabled]="!isValidForm" mat-raised-button color="primary" (click)="generateButtonClick()">Generate
+    </button>
+  </mat-card>
+  <mat-card *ngIf="scatterChartData" class="item itet-2" fxFlex="70%">
+    <canvas baseChart
+            [datasets]="scatterChartData"
+            [options]="scatterChartOptions"
+            [chartType]="scatterChartType">
+    </canvas>
+  </mat-card>
+</div>

@@ -15,6 +15,9 @@ import { AppComponent } from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import { GenerateDataSetComponent } from './generate-data-set/generate-data-set.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {ChartsModule} from 'ng2-charts';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 const appRoutes: Routes = [
@@ -32,6 +35,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatButtonModule,
     RouterModule.forRoot(appRoutes),
+    FlexLayoutModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
@@ -39,7 +43,9 @@ const appRoutes: Routes = [
     MatInputModule,
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
